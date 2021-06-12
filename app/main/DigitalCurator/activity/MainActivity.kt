@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             @SuppressLint("ClickableViewAccessibility")
+            //onQueryTextSubmit handles when text is inputted for search
             override fun onQueryTextSubmit(query: String?): Boolean {
                 Log.d("TAG", "$query")
                 val neededtxt = query.toString()
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
 
                         val client = OkHttpClient()
-
+                       //this api fetches information that we parse and put in search results
                         val request = Request.Builder()
                             .url("https://imdb-internet-movie-database-unofficial.p.rapidapi.com/film/$query")
                             .get()
@@ -97,7 +98,7 @@ class MainActivity : AppCompatActivity() {
 
                                         }
                                         Log.d("TAG","array is $characterarray")
-
+                                       //recycler is called here since it is used to display search results
                                         val rv_transaction =
                                             findViewById<RecyclerView>(R.id.recyclerview)
                                         runOnUiThread(Runnable {
@@ -113,11 +114,13 @@ class MainActivity : AppCompatActivity() {
                                                 length,
                                                 imageurl
                                             )
+                                            //handles click event for recycler
                                             rv_transaction.setOnTouchListener { _, _ ->
                                                 val intent = Intent(
                                                     this@MainActivity,
                                                     Movieactivity::class.java
                                                 )
+                                                //we use intents to pass info to next activity
                                                 intent.putExtra("actor", array.toString())
                                                 intent.putExtra("castlength", cast.length())
 
