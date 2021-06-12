@@ -19,7 +19,7 @@ import okhttp3.Response
 import org.json.JSONArray
 import org.json.JSONObject
 
-
+//Second page activity that shows movie trailers and it's info
 class Movieactivity : AppCompatActivity() {
     var actor:String = ""
     var character:String = ""
@@ -67,6 +67,7 @@ Thread{
     kotlin.run {
         val client = OkHttpClient().newBuilder()
                 .build()
+                //we use this api to fetch the key for youtube trailer
         val request: Request = Request.Builder()
                 .url("https://api.themoviedb.org/3/movie/$id/videos?api_key=6d19f3db2501382231cb022fbd2c7207")
                 .method("GET", null)
@@ -78,6 +79,7 @@ Thread{
                 Log.d("TAG", "$data")
                 val jsonObject = JSONObject(data)
                 val results  = jsonObject.getJSONArray("results")
+                //Incase movie is not availaible in the database we just upload it's poster instead 
                 if (results.length() == 0){
                     runOnUiThread(Runnable {
                         Toast.makeText(this, "Trailer not availaible", Toast.LENGTH_SHORT).show()
@@ -85,8 +87,10 @@ Thread{
                     })
                 } else {
                     val filter = results.getJSONObject(0)
+                    //key is fetched which is then used in youtube player's method to fetch the movie trailers
                     val key = filter.getString("key")
                     Log.d("TAG", "$key")
+                    //We use youtubeplayer's methods to play video according to our custom needs
                     youtubeplayer.addYouTubePlayerListener(object :
                             AbstractYouTubePlayerListener() {
                         override fun onReady(youTubePlayer: YouTubePlayer) {
@@ -105,6 +109,7 @@ Thread{
             kotlin.run {
                 val client = OkHttpClient().newBuilder()
                     .build()
+                    //This api fetches details for the movie
                 val request: Request = Request.Builder()
                     .url("https://api.themoviedb.org/3/movie/$id?api_key=6d19f3db2501382231cb022fbd2c7207&language=en-US")
                     .method("GET", null)
@@ -120,6 +125,7 @@ Thread{
                         runOnUiThread(Runnable {
                        budgettxt.text = "${budget} USD"
                        popultxt.text = "$popularity %"
+                            //On clicking the view genre button,a dialog is fetched and inflated which displays genre of the respective titles
                        genretxt.setOnClickListener {
                            val mDialog = LayoutInflater.from(this).inflate(R.layout.floating_dialog,null)
                            val mBuilder = AlertDialog.Builder(this).setView(mDialog)
