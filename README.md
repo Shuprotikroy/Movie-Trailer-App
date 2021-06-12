@@ -1,5 +1,15 @@
 # Movie-Trailer-App
 DigitalCurator App lets you search movies and displays trailers for the movies and other info such as it's imdb rating,popularity etc.
+======================================================================================================================================
+
+# API's used
+https://rapidapi.com/hmerritt/api/imdb-internet-movie-database-unofficial/
+https://developers.themoviedb.org/3
+===========================================================================
+
+# Youtube Player used
+https://github.com/PierfrancescoSoffritti/android-youtube-player
+=================================================================
 
 # Screenshots
 
