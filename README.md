@@ -13,7 +13,6 @@ DigitalCurator App lets you search movies and displays trailers for the movies a
 # API's used
 https://rapidapi.com/hmerritt/api/imdb-internet-movie-database-unofficial/
 
-
 https://developers.themoviedb.org/3
 
 
