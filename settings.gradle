@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "DigitalCurator -(Movie or TV-Series Info)"
